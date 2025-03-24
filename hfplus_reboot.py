@@ -88,7 +88,7 @@ def main():
         except:
             pass  # should be ok?
         # Bus 003 Device 012: ID 03eb:6124 Atmel Corp. at91sam SAMBA bootloader
-        print("Use the 'bossac' command to upload the new firmware! E.g 'sudo bossac -u -p /dev/ttyACM0; sudo bossac -e -b -v -p /dev/ttyACMO -w firmware.bin'.")
+        print("Use the 'bossac' command to upload the new firmware! E.g 'sudo bossac -u -p /dev/ttyACM0; sudo bossac -e -b -v -p /dev/ttyACM0 -w firmware.bin'.")
 
     elif args.normal_mode_enabled:
         os.system("bossac --boot=1 -p %s; bossac --reset -p %s" % (args.device_path, args.device_path))
