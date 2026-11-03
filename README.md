@@ -171,6 +171,27 @@ Firmware Version: R5.0.1-CD
 ```
 
 
+#### Firmware internals
+
+Curious how the R5.0.1-CD firmware actually works (USB vendor commands,
+streaming format, calibration flash, the SAM-BA reboot trick)? See
+[docs/airspy-hf-firmware-internals.md](docs/airspy-hf-firmware-internals.md)
+for independent reverse-engineering documentation, `hfplus_mkelf.py` to
+wrap the raw `.bin` for IDA/Ghidra/radare2, and the [analysis/](analysis/)
+folder for the annotated IDA database, decompiler dumps and reusable
+scripts.
+
+
+#### Open firmware
+
+[openfirmware/](openfirmware/) contains **OpenHF+**, a from-scratch
+replacement firmware for the HF+ Discovery (clean-room code + the
+linux-firmware blob model for the STA709 tuner tables). It builds with
+any `arm-none-eabi` toolchain, speaks the documented vendor protocol,
+keeps your calibration page intact, and includes the SAM-BA reboot for
+safe recovery. See its README for the roadmap and first-flash test plan.
+
+
 #### References
 
 - https://gist.github.com/jj1bdx/ce9eb3bd7320eed76396669a25f27e29

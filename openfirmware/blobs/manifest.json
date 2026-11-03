@@ -1,0 +1,14 @@
+{
+  "source_image": "hfplus-firmware-cd.bin",
+  "region": [
+    546888,
+    552004
+  ],
+  "anchors": {
+    "filters_912k_456k_650k_base": 546888,
+    "filters_384k_base": 547380,
+    "filters_228k_192k_base": 547540
+  },
+  "size": 5116,
+  "note": "offsets are absolute flash addresses; subtract REGION_START for blob-relative offsets"
+}

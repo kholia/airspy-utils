@@ -1,0 +1,22 @@
+name: openfirmware
+
+on:
+  push:
+    paths: ['openfirmware/**']
+  pull_request:
+    paths: ['openfirmware/**']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install toolchain
+        run: sudo apt-get update && sudo apt-get install -y gcc-arm-none-eabi binutils-arm-none-eabi
+      - name: Build OpenHF+
+        run: cd openfirmware && make
+      - name: Upload binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: openhf-firmware
+          path: openfirmware/build/openhf.bin

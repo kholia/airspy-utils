@@ -1,0 +1,46 @@
+[ 0] Initial SP 0x20001878
+[ 1] Reset          -> 0x83308  Reset_Handler
+[ 2] NMI            -> 0x83304  Default_Handler (b .)
+[ 3] HardFault      -> 0x83304  Default_Handler (b .)
+[ 4] MemManage      -> 0x83304  Default_Handler (b .)
+[ 5] BusFault       -> 0x83304  Default_Handler (b .)
+[ 6] UsageFault     -> 0x83304  Default_Handler (b .)
+[ 7] Reserved   (unused)
+[ 8] Reserved   (unused)
+[ 9] Reserved   (unused)
+[10] Reserved   (unused)
+[11] SVCall         -> 0x83304  Default_Handler (b .)
+[12] DebugMon       -> 0x83304  Default_Handler (b .)
+[13] Reserved   (unused)
+[14] PendSV         -> 0x83304  Default_Handler (b .)
+[15] SysTick        -> 0x83304  Default_Handler (b .)
+[16] IRQ0 ?         -> Default_Handler
+[17] IRQ1 ?         -> Default_Handler
+[18] IRQ2 ?         -> Default_Handler
+[19] IRQ3 ?         -> Default_Handler
+[20] IRQ4 ?         -> Default_Handler
+[21] IRQ5 ?         -> Default_Handler
+[22] IRQ6 ?         -> Default_Handler
+[23] IRQ7 ?         -> Default_Handler
+[24] IRQ8 ?         -> Default_Handler
+[25] IRQ9 ?         -> Default_Handler
+[26] IRQ10 PIOA     -> 0x812FC  pioa_irq
+[27] IRQ11 PIOB     -> 0x813D4  piob_irq
+[28] IRQ12 PIOC     -> Default_Handler
+[29] IRQ13 USART0   -> Default_Handler
+[30] IRQ14 USART1   -> Default_Handler
+[31] IRQ15 USART2   -> Default_Handler
+[32] IRQ16 USART3   -> Default_Handler
+[33] IRQ17 HSMCI    -> Default_Handler
+[34] IRQ18 TWI0     -> Default_Handler
+[35] IRQ19 TWI1     -> Default_Handler
+[36] IRQ20 SPI      -> Default_Handler
+[37] IRQ21 SSC      -> 0x839E0  ssc_irq_stub (bx lr)
+[38] IRQ22 TC0      -> Default_Handler
+[39] IRQ23 TC1      -> Default_Handler
+[40] IRQ24 TC2      -> Default_Handler
+[41] IRQ25 PWM      -> Default_Handler
+[42] IRQ26 ADC12B   -> Default_Handler
+[43] IRQ27 ADC      -> Default_Handler
+[44] IRQ28 DMAC     -> 0x8367C  dmac_irq
+[45] IRQ29 UDPHS    -> 0x81E0C  udphs_irq

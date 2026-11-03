@@ -1,0 +1,40 @@
+{
+ "renames": {
+  "vendor_request_dispatch": "module 'idc' has no attribute 'SN_FORCE'",
+  "reboot_to_samba": "module 'idc' has no attribute 'SN_FORCE'",
+  "prepare_boot_rom": "module 'idc' has no attribute 'SN_FORCE'",
+  "cmd_receiver_mode": "module 'idc' has no attribute 'SN_FORCE'",
+  "cmd_set_freq_out_cb": "module 'idc' has no attribute 'SN_FORCE'",
+  "cmd_set_samplerate": "module 'idc' has no attribute 'SN_FORCE'",
+  "cmd_set_agc": "module 'idc' has no attribute 'SN_FORCE'",
+  "cmd_set_agc_threshold": "module 'idc' has no attribute 'SN_FORCE'",
+  "cmd_set_att": "module 'idc' has no attribute 'SN_FORCE'",
+  "cmd_set_lna": "module 'idc' has no attribute 'SN_FORCE'",
+  "cmd_set_user_output": "module 'idc' has no attribute 'SN_FORCE'",
+  "cmd_get_version": "module 'idc' has no attribute 'SN_FORCE'",
+  "cmd_get_filter_gain": "module 'idc' has no attribute 'SN_FORCE'",
+  "config_read_flash": "module 'idc' has no attribute 'SN_FORCE'",
+  "config_write_out_cb": "module 'idc' has no attribute 'SN_FORCE'",
+  "cmd_get_serialno": "module 'idc' has no attribute 'SN_FORCE'",
+  "cmd_set_frontend_options": "module 'idc' has no attribute 'SN_FORCE'",
+  "cmd_read_diagnostics": "module 'idc' has no attribute 'SN_FORCE'",
+  "udphs_irq": "module 'idc' has no attribute 'SN_FORCE'",
+  "ssc_irq": "module 'idc' has no attribute 'SN_FORCE'",
+  "dmac_irq": "module 'idc' has no attribute 'SN_FORCE'",
+  "pioa_irq": "module 'idc' has no attribute 'SN_FORCE'",
+  "piob_irq": "module 'idc' has no attribute 'SN_FORCE'",
+  "Reset_Handler": "module 'idc' has no attribute 'SN_FORCE'",
+  "is_streaming": "module 'idc' has no attribute 'SN_FORCE'"
+ },
+ "dec": {
+  "boot_rom": "int __fastcall sub_83280(unsigned int a1)\n{\n  int result; // r0\n\n  if ( a1 > 1 )\n    return 17;\n  if ( sub_80FFC(a1: 1074661376, a2: 13, a3: 0) != 0 )\n    return 16 * (sub_80FFC(a1: 1074661376, a2: 12, a3: a1) != 0);\n  result = sub_80FD8(a1: 1074661376) & (1 << a1);\n  if ( result != 0 )\n    return 16 * (sub_80FFC(a1: 1074661376, a2: 12, a3: a1) != 0);\n  return result;\n}",
+  "cfg_read": "int __fastcall sub_835D8(int a1, int a2)\n{\n  if ( a2 > 256 )\n    return -1;\n  sub_857A0(a1, a2: 589568, a3: a2);\n  return 0;\n}",
+  "cfg_write": "int sub_85204()\n{\n  if ( sub_830D8(a1: 0, a2: 6) != 0\n    || sub_8322C(a1: 589568, a2: 589823, a3: 0) != 0\n    || sub_830F0(a1: 589568, a2: 536872304, a3: 256, a4: 1) != 0 )\n  {\n    return -1;\n  }\n  else\n  {\n    return -(sub_831D8(a1: 589568, a2: 589823, a3: 0) != 0);\n  }\n}",
+  "rx_mode": "char __fastcall sub_801D0(char result)\n{\n  MEMORY[0x20000338] = result;\n  MEMORY[0x20000339] = 1;\n  return result;\n}",
+  "set_freq": "int sub_85214()\n{\n  return sub_80148(a1: __builtin_bswap32(MEMORY[0x20000570]));\n}",
+  "set_rate": "int __fastcall sub_8015C(int result)\n{\n  MEMORY[0x200001A0] = result;\n  MEMORY[0x20000337] = 1;\n  return result;\n}",
+  "get_ver": "int __fastcall sub_80260(int a1, int a2)\n{\n  return sub_85730(a1, a2: \"R5.0.1-CD\", a3: a2 - 1);\n}",
+  "get_serial": "_DWORD *__fastcall sub_837FC(_DWORD *result)\n{\n  __int64 v1; // kr00_8\n  __int64 v2; // kr08_8\n\n  v1 = MEMORY[0x2000052C];\n  v2 = MEMORY[0x20000534];\n  *result = 2;\n  result[1] = v1;\n  result[3] = v2;\n  result[2] = HIDWORD(v1);\n  result[4] = HIDWORD(v2);\n  return result;\n}",
+  "diag": "int __fastcall sub_83DD4(int a1, int a2)\n{\n  _BYTE v3[4]; // [sp+4h] [bp-18h] BYREF\n  int v4; // [sp+8h] [bp-14h]\n  int v5; // [sp+Ch] [bp-10h]\n  int v6; // [sp+10h] [bp-Ch]\n  char v7; // [sp+14h] [bp-8h]\n\n  v5 = a1;\n  v6 = a2;\n  v7 = 97;\n  v4 = 0;\n  return -(sub_8190C(a1: 1074282496, a2: v3) != 0);\n}"
+ }
+}
