@@ -31,7 +31,7 @@ This is the only Airspy device I have. Hint: Sponsorships can change this ;)
 #### Setup
 
 ```
-sudo apt install bossa-cli python3-pip airspyhf -y
+sudo apt install bossa-cli python3-pip airspyhf wget unzip -y
 ```
 
 ```
@@ -42,10 +42,27 @@ cd airspy-utils
 pip3 install -r requirements.txt
 ```
 
+Install the [udev rules](60-airspy-hfplus.rules) and add your user to `plugdev`
+to access the receiver and its bootloader serial port without sudo:
+
+```sh
+sudo groupadd -f plugdev
+sudo usermod -aG plugdev "$(id -un)"
+sudo install -m 644 60-airspy-hfplus.rules /etc/udev/rules.d/
+sudo udevadm control --reload-rules
+```
+
+Log out and log back in to activate the group membership, then unplug and
+reconnect the receiver so the rules take effect. Only this setup requires sudo;
+the Python utilities and `bossac` commands below can then run as your user,
+including over SSH. The rules grant read/write access to `plugdev` members.
+The bootloader uses the generic Atmel SAM-BA ID `03eb:6124`, so the bootloader
+rules also apply to other devices using that ID.
+
 
 #### Usage
 
-See firmware version:
+See the current firmware version (example):
 
 ```
 $ python3 hfplus_fw.py
@@ -54,11 +71,11 @@ R3.0.6-CD
 
 ATTENTION: Please verify if the firmware is `BB` or `CD`. This is IMPORTANT.
 
-See firmware version:
+Expected firmware version after upgrading (CD example):
 
 ```
 $ python3 hfplus_fw.py  # after firmware upgrade
-R3.0.7-CD
+R5.0.1-CD
 ```
 
 Backup calibration:
@@ -108,12 +125,13 @@ python3 hfplus_reboot.py -n -p /dev/ttyACM0
 Note: You may need to replace `/dev/ttyACM0` with the actual value for your
 setup. It might be `/dev/ttyACM1` for example.
 
-Grab official firmware:
+Grab the official [R5.0.1 firmware](https://airspy.com/downloads/airspy-hf-flash-2024-12-11_5.0.1.zip)
+(released 2024-12-11):
 
 ```
-wget https://airspy.com/downloads/airspy-hf-flash-20200604.zip
+wget https://airspy.com/downloads/airspy-hf-flash-2024-12-11_5.0.1.zip
 
-unzip airspy-hf-flash-20200604.zip
+unzip airspy-hf-flash-2024-12-11_5.0.1.zip
 
 cp airspy-hf-flash/hfplus-firmware-cd.bin firmware.bin  # ATTENTION: for devices using 'CD' firmware
 # cp airspy-hf-flash/hfplus-firmware-bb.bin firmware.bin  # ATTENTION: for devices using 'BB' firmware
@@ -121,12 +139,20 @@ cp airspy-hf-flash/hfplus-firmware-cd.bin firmware.bin  # ATTENTION: for devices
 
 Full process to update the firmware (and restore the calibration):
 
+Close any SDR software first. Use the `BB` or `CD` image matching the firmware
+suffix recorded before entering bootloader mode, and save your calibration
+value with `python3 hfplus_ppb.py -r` before flashing. After entering bootloader
+mode, wait for `/dev/ttyACM0` to appear (adjust the path in every command if
+necessary).
+
 ```
 python3 hfplus_reboot.py -b
 
-sudo bossac -u -p /dev/ttyACM0  # you can try without sudo too
+udevadm settle
 
-sudo bossac -e -b -v -p /dev/ttyACM0 -w firmware.bin
+bossac -u -p /dev/ttyACM0
+
+bossac -e -b -v -p /dev/ttyACM0 -w firmware.bin
 
 python3 hfplus_reboot.py -n -p /dev/ttyACM0
 
@@ -141,8 +167,7 @@ AirSpy HF library version: 1.6.8
 
 S/N: 0xXYZ
 Part ID: 0x00000002
-Firmware Version: R3.0.7-CD
-Available sample rates: 912 kS/s 768 kS/s 456 kS/s 384 kS/s 256 kS/s 192 kS/s
+Firmware Version: R5.0.1-CD
 ```
 
 
@@ -154,7 +179,7 @@ Available sample rates: 912 kS/s 768 kS/s 456 kS/s 384 kS/s 256 kS/s 192 kS/s
 
 - https://airspy.com/downloads/SDRSharp_The_Guide_v3.0_ENG.pdf
 
-- https://airspy.com/downloads/airspy-hf-flash-20200604.zip
+- https://airspy.com/downloads/airspy-hf-flash-2024-12-11_5.0.1.zip
 
 - https://github.com/airspy/airspyhf/issues/18 ("funny" thread)
 

@@ -1,0 +1,8 @@
+# Airspy HF+ in normal mode (PyUSB/libairspyhf).
+SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ATTR{idVendor}=="03eb", ATTR{idProduct}=="800c", MODE="0660", GROUP="plugdev"
+
+# Atmel SAM-BA bootloader USB device (also used by other SAM-BA devices).
+SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ATTR{idVendor}=="03eb", ATTR{idProduct}=="6124", MODE="0660", GROUP="plugdev"
+
+# Bootloader serial port used by bossac and hfplus_reboot.py -n.
+SUBSYSTEM=="tty", KERNEL=="ttyACM[0-9]*", ATTRS{idVendor}=="03eb", ATTRS{idProduct}=="6124", MODE="0660", GROUP="plugdev"
